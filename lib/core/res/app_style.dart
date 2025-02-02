@@ -12,8 +12,11 @@ TextStyle subtitleStyle = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,
 );
-
-
+TextStyle subtitleStyle4 = TextStyle(
+  color: grayColor,
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+);
 
 TextStyle titleFavoStyle = TextStyle(
   color: titleColor,
@@ -28,7 +31,7 @@ TextStyle skipForNowStyle = TextStyle(
 );
 
 TextStyle hintStyle = TextStyle(
-  color: hintColor,
+  color: notificationTitleColor,
   fontSize: 16,
   fontWeight: FontWeight.w500,
 );
@@ -160,12 +163,18 @@ TextStyle enterOtherStyle = TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w500,
 );
-
+TextStyle labalStyle = TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w600,
+  color: white,
+);
 TextStyle offerSubTitleAndDrowerItemStyle = TextStyle(
   color: grayColor,
   fontSize: 12,
   fontWeight: FontWeight.w500,
 );
+TextStyle titleDialogStyle = const TextStyle(
+    color: Colors.black, fontWeight: FontWeight.w400, fontSize: 25);
 
 TextStyle addMoneyStyle = TextStyle(
   color: primaryColor,
@@ -213,8 +222,8 @@ TextStyle titleSpecifications = TextStyle(
 );
 
 TextStyle subTitleSpecifications = TextStyle(
-  color: subTitleColor,
-  fontSize: 8,
+  color: grayColor,
+  fontSize: 10,
   fontWeight: FontWeight.w400,
 );
 TextStyle titleOfferStyle = TextStyle(

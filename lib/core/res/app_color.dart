@@ -9,6 +9,7 @@ Color warningColor = const Color(0xffEF6A01);
 Color offerTitleColor = const Color(0xffF57F17);
 Color cancelColor = const Color(0xffD32F2F);
 Color successColor = const Color(0xff43A048);
+Color backColor = const Color(0xffE2F5ED);
 Color white = Colors.white;
 
 
@@ -19,8 +20,10 @@ Color subTilteTwoColor = const Color(0xffB8B8B8);
 Color deleteButtonColor = const Color(0xffF44336);
 Color titleOffer=const Color(0xffF57F17);
 Color hintColor = const Color(0xffD0D0D0);
+Color proflileIconColor = const Color(0xffD9D9D9);
 Color grayColor = const Color(0xff5A5A5A);
 Color blackColor = const Color(0xff121212);
 Color notificationTitleColor = const Color(0xff898989);
 Color appbarTitleColor = const Color(0xff2A2A2A);
 Color atlestColor = const Color(0xffA6A6A6);
+Color borderColor = const Color(0xff8AD4B5);

@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ride_app/core/res/app_color.dart';
+import 'package:ride_app/features/data/remote/auth_service.dart';
 import 'package:ride_app/features/view/pages/authentication/set_password_view.dart';
 import 'package:ride_app/features/view/pages/authentication/sign_in.dart';
 import 'package:ride_app/features/view/widget/button_widget.dart';
@@ -20,6 +24,56 @@ class _SingUpViewState extends State<SingUpView> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+  bool isloading = false;
+  Future<void> handleLogin() async {
+    final phone = phoneController.text.trim();
+
+    if (_formKey.currentState!.validate() && isChecked == true) {
+      setState(() {
+        isloading = true;
+      });
+      final exists = await CheckUserStatus().checkPhoneNumberExists(phone);
+
+      if (exists) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(
+              'Error',
+              style: TextStyle(color: Colors.red.shade700),
+            ),
+            content: const Text('This phone num is used',
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+        setState(() {
+          isloading = false;
+        });
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SetPasswordView(
+              firstName: firstNameController.text,
+              lastName: lastNameController.text,
+              phone: phoneController.text,
+            ),
+          ),
+        );
+        setState(() {
+          isloading = false;
+        });
+      }
+    } else if (isChecked == false) {
+      showSnackbar(context, Colors.red, "please confirm the privacy policy");
+    }
+  }
 
   bool? isChecked = false;
   final _formKey = GlobalKey<FormState>();
@@ -36,10 +90,6 @@ class _SingUpViewState extends State<SingUpView> {
             icon: const Icon(Icons.arrow_back_ios),
           ),
           elevation: 0,
-          title: Text(
-            appString.BACK,
-            style: appBarBackStyle,
-          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(13),
@@ -47,7 +97,6 @@ class _SingUpViewState extends State<SingUpView> {
             key: _formKey,
             child: Column(
               children: [
-                const SizedBox(height: 20),
                 Text(
                   appString.SIGNUPWITH,
                   style: titleStyle,
@@ -89,6 +138,9 @@ class _SingUpViewState extends State<SingUpView> {
                   ),
                 ),
                 TextFromFildWidget(
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
                   obscureText: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -99,10 +151,13 @@ class _SingUpViewState extends State<SingUpView> {
                     }
                     return null;
                   },
-                  textInputType: TextInputType.phone,
+                  textInputType: TextInputType.number,
                   readOnly: false,
                   controller: phoneController,
                   lableText: appString.YOURMOBILE,
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 ListTile(
                   title: Text(
@@ -125,27 +180,11 @@ class _SingUpViewState extends State<SingUpView> {
                     },
                   ),
                 ),
-                const SizedBox(height: 70),
                 ButtonWidget(
+                  topHeight: 40,
+                  showCircle: isloading,
                   title: appString.SIGINUP,
-                  ontap: () {
-                    if (_formKey.currentState!.validate() &&
-                        isChecked == true) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SetPasswordView(
-                            firstName: firstNameController.text,
-                            lastName: lastNameController.text,
-                            phone: phoneController.text,
-                          ),
-                        ),
-                      );
-                    } else if (isChecked == false) {
-                      showSnackbar(context, Colors.red,
-                          "please confirm the privacy policy");
-                    }
-                  },
+                  ontap: handleLogin,
                   color: darkPrimaryColor,
                   textColor: white,
                   borderColor: primaryColor,

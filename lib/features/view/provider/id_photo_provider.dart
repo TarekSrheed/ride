@@ -18,6 +18,6 @@ class IdPhotoNotifier extends StateNotifier<File?> {
   }
 }
 
-final idPhotoProvider = StateNotifierProvider<IdPhotoNotifier, File?>(
+final   idPhotoProvider = StateNotifierProvider<IdPhotoNotifier, File?>(
   (ref) => IdPhotoNotifier(),
 );

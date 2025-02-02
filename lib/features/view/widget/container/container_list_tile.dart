@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ride_app/core/res/app_color.dart';
 
@@ -18,9 +17,10 @@ class ContainerListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      width: MediaQuery.of(context).size.width - 20,
+      alignment: Alignment.center,
+      height: 60,
+      margin: const EdgeInsets.only(bottom: 15),
+      width: double.infinity,
       decoration: BoxDecoration(
         border: Border.all(color: primaryColor),
         borderRadius: BorderRadius.circular(8),
@@ -28,7 +28,7 @@ class ContainerListTile extends StatelessWidget {
       ),
       child: ListTile(
         title: title,
-        subtitle: subTilte,
+        // subtitle: subTilte,
         trailing: trailing,
         leading: leading,
       ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ride_app/core/res/app_color.dart';
 import 'package:ride_app/core/res/app_style.dart';
 
 class TextFromFildWidget extends StatelessWidget {
-  const TextFromFildWidget({
+  TextFromFildWidget({
     super.key,
     this.suffixIcon,
     this.prefixIcon,
@@ -12,7 +13,9 @@ class TextFromFildWidget extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.hintText,
+    this.height,
     this.errorText,
+    this.inputFormatters,
     required this.readOnly,
     required this.obscureText,
     required this.controller,
@@ -23,29 +26,30 @@ class TextFromFildWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final String lableText;
   final String? hintText;
+  double? height = 60;
   final String? errorText;
   final bool readOnly;
   final bool obscureText;
   final String? Function(String?)? validator;
   final TextInputType? textInputType;
   final Function(String)? onChanged;
-
+  List<TextInputFormatter>? inputFormatters;
   final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60,
+      height: height,
       child: TextFormField(
         onChanged: onChanged,
-        obscureText:obscureText ,
+        obscureText: obscureText,
         validator: validator,
         keyboardType: textInputType,
+        inputFormatters: inputFormatters,
         readOnly: readOnly,
         onTap: onTap,
         controller: controller,
         decoration: InputDecoration(
-          
           contentPadding:
               const EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
           suffixIcon: suffixIcon,

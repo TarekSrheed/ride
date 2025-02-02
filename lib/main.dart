@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ride_app/core/config/service_locator.dart';
+import 'package:ride_app/features/view/pages/authentication/onboarding_page.dart';
 import 'package:ride_app/features/view/pages/authentication/welcome_view.dart';
-import 'package:ride_app/features/view/pages/map_page.dart';
+import 'package:ride_app/features/view/pages/navigation_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
     return ProviderScope(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: checkAuthorized() ? WelcomView() : MapScreen(),
+        home: checkAuthorized() ? OnboardingView() : NavigationPage(),
       ),
     );
   }

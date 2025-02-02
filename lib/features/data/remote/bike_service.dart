@@ -11,11 +11,10 @@ class BikeService {
           .from('bicycles')
           .select()
           .eq('status', 'Available')
-          .eq('CurrentLocationID', locationId);
-
+          .eq('current_location_id', locationId);
       return response;
     } catch (e) {
-      throw Exception('Failed to upload image: $e');
+      throw Exception('Failed to get bikes: $e');
     }
   }
 

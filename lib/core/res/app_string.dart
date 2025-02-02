@@ -16,7 +16,7 @@ class AppString {
       'Sell houses easily with the help of\n Listenoryx and to make this line big\n I am writing more.';
 
   String ATANYTIME = 'At anytime';
-  String BOOKYOURCAR = 'Book your car';
+  String BOOKYOURBIKE = 'Book your bike';
   String INVALIDEMAILORPASSWORD = 'invalid email or password';
   String GO = 'Go';
   String ADDID = 'Add an ID photo';
@@ -66,8 +66,9 @@ class AppString {
   String CAR = 'Car';
   String BIKE = 'Bike';
   String TAXI = 'Taxi';
+  String NOCONNECTON = 'There is no connection';
 
-  String AVAIABLECYCLE = 'Avaiable cars for ride';
+  String AVAIABLECYCLE = 'Avaiable bikes for ride';
   String RIDENOW = 'Ride Now';
   String BOOKLATER = 'Book later';
   String REQUESTFORRENT = 'Request for rent';
@@ -75,8 +76,7 @@ class AppString {
   String CONFIRMBOOKING = 'Confirm Booking';
   String CONFIRMRIDE = 'Confirm Ride';
   String THANKYOU = 'Thank you';
-  String YOURBOOKINGHAS =
-      'Your booking has been placed sent to Md. Sharif Ahmed';
+  String YOURBOOKINGHAS = 'Thank you for booking and for using our services';
   String PAYMENT = 'Payment';
   String CHARGE = 'Charge';
   String PAYMENTSUCCESS = 'Payment Success';
@@ -95,12 +95,12 @@ class AppString {
   String GENDER = 'Gender';
   String BYSIGININGUP =
       'By signing up. you agree to the Terms of service and Privacy policy.';
-  String SIGINUP = 'Sign Up';
+  String SIGINUP = ' Sign Up';
   String SIGNUPWITHGMAIL = 'Sign up with Gmail';
   String SIGNUPWITHAPPLE = 'Sign up with Apple';
   String SIGNUPWITHFACEBOOK = 'Sign up with Facebook';
   String ALREADYHAVE = 'Already have an account? ';
-  String SIGNIN = 'Sign in';
+  String SIGNIN = ' Log In';
   String SETPASSWORD = 'Set password';
   String SETYOURPASSWORD = 'Set your password and\nyour birth date';
   String ENTERYOURPASSWORD = 'Enter Your Password';
@@ -116,7 +116,7 @@ class AppString {
   String CONFIRM = 'Confirm';
   String ADDSUCCESS = 'Add Success';
   String COLLECT = 'Collect';
-  String ADDRESS = 'Address';
+  String ADDRESS = 'Enter an address';
   String LOGOUT = 'Logout';
   String HISTORY = 'History';
   String COMPLAIN = 'Complain';

@@ -5,11 +5,13 @@ import 'package:ride_app/core/res/app_style.dart';
 class ContainerSpecifications extends StatelessWidget {
   const ContainerSpecifications({
     super.key,
-    required this.image,
+    //  this.image,
     required this.title,
     required this.subtitle,
+    required this.icon,
   });
-  final String image;
+  // final String image;
+  final IconData? icon;
   final String title;
   final String subtitle;
   @override
@@ -31,7 +33,12 @@ class ContainerSpecifications extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(image),
+              Icon(
+                icon,
+                color: Colors.grey.shade800,
+                size: 20,
+              ),
+              // Image.asset(image!),
               Text(
                 title,
                 style: titleSpecifications,

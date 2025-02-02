@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ride_app/core/res/app_images.dart';
 import 'package:ride_app/features/view/pages/authentication/sign_in.dart';
 import 'package:ride_app/features/view/pages/authentication/sign_up.dart';
 import '../../../../core/res/app_color.dart';
@@ -13,55 +14,56 @@ class WelcomView extends StatelessWidget {
   Widget build(BuildContext context) {
     double paddingWidth = MediaQuery.of(context).size.width;
     double paddingHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(paddingWidth * 0.02),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            // Image.asset(welcomeImage),
+            Image.asset(
+              fit: BoxFit.contain,
+              imge6,
+              width: double.infinity,
+              height: 300,
+            ),
             Text(
               AppString().WELCOME,
               style: titleStyle,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  top: paddingHeight * 0.03, bottom: paddingHeight * 0.25),
-              child: Text(
-                AppString().HAVEAETTER,
-                style: subtitleStyle,
-              ),
+            const SizedBox(height: 10),
+            Text(
+              AppString().HAVEAETTER,
+              style: subtitleStyle,
             ),
             ButtonWidget(
+              topHeight: paddingHeight / 4,
               borderColor: darkPrimaryColor,
               color: darkPrimaryColor,
               ontap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>  const SingUpView(),
+                      builder: (context) => const SingUpView(),
                     ));
               },
               width: MediaQuery.of(context).size.width,
               textColor: white,
               title: AppString().CREATE,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                  bottom: paddingHeight * 0.001, top: paddingHeight * 0.03),
-              child: ButtonWidget(
-                borderColor: darkPrimaryColor,
-                color: Colors.black.withOpacity(0),
-                ontap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SingInView(),
-                      ));
-                },
-                width: MediaQuery.of(context).size.width,
-                textColor: darkPrimaryColor,
-                title: AppString().LOGIN,
-              ),
+            ButtonWidget(
+              topHeight: 15,
+              borderColor: darkPrimaryColor,
+              color: Colors.black.withOpacity(0),
+              ontap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SingInView(),
+                    ));
+              },
+              width: MediaQuery.of(context).size.width,
+              textColor: darkPrimaryColor,
+              title: AppString().LOGIN,
             ),
           ],
         ),

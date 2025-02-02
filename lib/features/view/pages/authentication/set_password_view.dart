@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ride_app/core/config/service_locator.dart';
 import 'package:ride_app/core/res/app_color.dart';
 import 'package:ride_app/core/res/app_style.dart';
+import 'package:ride_app/features/data/remote/auth_service.dart';
 import 'package:ride_app/features/view/pages/authentication/id_photo_uploader_view.dart';
-import 'package:ride_app/features/view/pages/authentication/welcome_view.dart';
 import 'package:ride_app/features/view/provider/immutable_data.dart';
 import 'package:ride_app/features/view/widget/button_widget.dart';
 import 'package:ride_app/features/view/widget/text_from_fild_widget.dart';
@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/res/app_string.dart';
 
-class SetPasswordView extends StatelessWidget {
+class SetPasswordView extends StatefulWidget {
   final String firstName;
   final String lastName;
   final String phone;
@@ -23,15 +23,33 @@ class SetPasswordView extends StatelessWidget {
     required this.lastName,
     required this.phone,
   });
+
+  @override
+  State<SetPasswordView> createState() => _SetPasswordViewState();
+}
+
+class _SetPasswordViewState extends State<SetPasswordView> {
   final TextEditingController passwordController = TextEditingController();
+
   final TextEditingController confirmeController = TextEditingController();
+
   final TextEditingController dateController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   final ValueNotifier<String?> _passwordError = ValueNotifier<String?>(null);
+
   final ValueNotifier<bool> _showPassword = ValueNotifier<bool>(false);
+
   final ValueNotifier<DateTime?> _selectDate = ValueNotifier<DateTime?>(null);
+
   final ValueNotifier<bool> _showConfirmPassword = ValueNotifier<bool>(false);
+
+  final ValueNotifier<bool> _showCircle = ValueNotifier<bool>(false);
+
   final AppString appString = AppString();
+
+  bool isloading = false;
 
   void validatePassword(String value) {
     if (value.isEmpty) {
@@ -66,7 +84,7 @@ class SetPasswordView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           appString.BACK,
-          style: titleStyle,
+          style: appbarTitleStyle,
         ),
         leading: IconButton(
           onPressed: () {
@@ -179,21 +197,41 @@ class SetPasswordView extends StatelessWidget {
               ),
               Consumer(builder: (context, ref, _) {
                 return ButtonWidget(
+                    showCircle: isloading,
                     title: AppString().REGISTER,
                     ontap: () async {
                       if (_formKey.currentState!.validate() &&
                           _passwordError.value == null) {
+                        setState(() {
+                          isloading = true;
+                        });
                         final result = await ref.read(userProvider).signUp({
-                          'first_name': firstName,
-                          "last_name": lastName,
-                          'phone': phone,
+                          'first_name': widget.firstName,
+                          "last_name": widget.lastName,
+                          'phone': widget.phone,
                           'birth_Date': dateController.text,
                           'password': passwordController.text,
                           'confirm_password': confirmeController.text,
                         });
                         if (result == true) {
-                          
-                          await ref.read(userProvider).getUserId(phone);
+                          await CheckUserStatus().getUserId(widget.phone);
+                          core
+                              .get<SharedPreferences>()
+                              .setString('firstName', widget.firstName);
+                          core
+                              .get<SharedPreferences>()
+                              .setString('lastName', widget.lastName);
+                          core
+                              .get<SharedPreferences>()
+                              .setString('phone', widget.phone);
+                          core
+                              .get<SharedPreferences>()
+                              .setString('date', dateController.text);
+                          core
+                              .get<SharedPreferences>()
+                              .setString('password', passwordController.text);
+                          core.get<SharedPreferences>().setString(
+                              'confirmPassword', confirmeController.text);
 
                           Navigator.push(
                             context,
@@ -201,8 +239,14 @@ class SetPasswordView extends StatelessWidget {
                               builder: (context) => IdPhotoUploaderScreen(),
                             ),
                           );
+                          setState(() {
+                            isloading = false;
+                          });
                         } else {
-                          Text("-------------------");
+                          setState(() {
+                            isloading = false;
+                          });
+                          Text("There is an error");
                         }
                       }
                     },
