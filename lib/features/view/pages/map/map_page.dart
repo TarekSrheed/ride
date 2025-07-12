@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ride_app/core/config/secrets.dart';
 import 'package:ride_app/core/res/app_string.dart';
 import 'package:ride_app/core/res/app_style.dart';
 import 'package:ride_app/features/view/pages/transport/avalible_cicle_list_page.dart';
@@ -103,8 +104,14 @@ class _MapScreenState extends State<MapScreen> {
                     children: [
                       TileLayer(
                         urlTemplate:
-                            "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                            "https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${Secrets.mapKey}",
+                        userAgentPackageName: 'com.example.app',
                       ),
+
+                      // TileLayer(
+                      //   urlTemplate:
+                      //       "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      // ),
                       MarkerLayer(
                         markers: markers,
                       ),
